@@ -25,7 +25,7 @@ module.exports.profile=function(req,res)
 
 module.exports.sign_in=function(req,res)
 {
-    //console.log(req.cookies.user_id);
+
     if(req.cookies.user_id)
     {
         //res.clearCookie(req.cookies.user_id);
