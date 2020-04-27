@@ -1,0 +1,12 @@
+<h1>This is <%=title%> section</h1>
+<p><h3>Name:<%=user.Name%></h3></p>
+<p><h3>Email:<%=user.Email%></h3></p>
+
+<button id="logOut">Sign Out</button>
+
+<script type="text/javascript">
+    document.getElementById("logOut").onclick=()=>
+    {
+        location.href="/user/log-out";
+    }
+</script>
