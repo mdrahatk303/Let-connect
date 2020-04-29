@@ -10,12 +10,14 @@
   "author": "Rahat",
   "license": "ISC",
   "dependencies": {
-    "cookie-parser": "^1.4.5",
-    "ejs": "^3.0.2",
-    "express": "^4.17.1",
+    "connect-mongo": "^2.0.3",
+    "cookie-parser": "^1.4.4",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
     "express-ejs-layouts": "^2.5.0",
-    "joi": "^14.3.1",
-    "mongoose": "^5.9.10"
+    "express-session": "^1.15.6",
+    "mongoose": "^5.4.6",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0"
   }
 }
- 
