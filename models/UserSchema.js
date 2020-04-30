@@ -19,7 +19,7 @@ const User_Schema=mongoose.Schema({
         timestamps:true
 });
 
-const UserSchema=mongoose.model('user_schema',User_Schema);
+const UserSchema=mongoose.model('userschema',User_Schema);
 module.exports=UserSchema;
 
   
