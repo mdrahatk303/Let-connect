@@ -4,6 +4,7 @@ const app = express();
 const port = 8000;
 const expressLayouts = require('express-ejs-layouts');
 const db = require('./config/mongoose');
+const path = require('path');
 // used for session cookie
 const session = require('express-session');
 const passport = require('passport');
@@ -26,7 +27,8 @@ app.set('layout extractScripts', true);
 
 // set up the view engine
 app.set('view engine', 'ejs');
-app.set('views', './views');
+
+app.set('views', path.join(__dirname, 'views'));
 
 // mongo store is used to store the session cookie in the db
 app.use(session({

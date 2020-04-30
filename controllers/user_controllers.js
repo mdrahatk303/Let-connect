@@ -2,9 +2,16 @@ const User = require('../models/UserSchema');
 
 
 module.exports.profile = function(req, res){
-    return res.render('profile', {
-        title: 'User Profile'
+    User.findById(req.params.userId,function(err,user)
+    {
+        if(err)
+        {
+            console.log(err);
+            return res.redirect('back');
+        }
+        return res.render('profile', {title: 'User Profile',userInfo:user})
     })
+    
 }
 
 

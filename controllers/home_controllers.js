@@ -11,10 +11,13 @@ module.exports.home=function(req,res)
             path:'user'
         }
     }).
-    exec(function(err,posts)
+    exec(function(err,posts) 
     {
-       
-        return res.render('home',{title:'home',url:req.url,posts});
+       User.find({},function(err,users)
+       {
+            return res.render('home',{title:'home',posts,users});
+       })
+        
     })
     
 }
