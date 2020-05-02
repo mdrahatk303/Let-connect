@@ -1,0 +1,11 @@
+<link rel="stylesheet" href="/css/user_profile.css">
+
+<h1>Friends</h1>
+<ul>
+<%for(let friend of user.Friends){%>
+        <li>
+            <a href="/users/profile/<%=friend.id%>"><%=friend.Name%></a>
+            <a href="/friends/remfriends/<%=friend.id%>">Remove</a>
+        </li>
+<%}%>
+</ul>
