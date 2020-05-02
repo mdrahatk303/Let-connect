@@ -3,3 +3,12 @@
 <h1>This is <%=title%> section</h1>
 <p><h3>Name:<%=userInfo.Name%></h3></p>
 <p><h3>Email:<%=userInfo.Email%></h3></p>
+
+
+<% if(userInfo.id==locals.user.id){%>
+<form method="POST" action="/users/update">
+    <input type="email" name="email" placeholder="New Email">
+    <input type="text" name="name" placeholder="New User Name">
+    <input type="submit" value="Update">
+</form>
+<%}%>

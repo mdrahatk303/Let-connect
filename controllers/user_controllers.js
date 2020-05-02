@@ -18,7 +18,7 @@ module.exports.profile = function(req, res){
 // render the sign up page
 module.exports.signUp = function(req, res){
     if (req.isAuthenticated()){
-        return res.redirect('/users/profile');
+        return res.redirect('/');
     }
 
 
@@ -35,9 +35,10 @@ module.exports.signIn = function(req, res){
     if (req.isAuthenticated()){
         {
            
-            return res.redirect('/users/profile');
+            return res.redirect('/');
         }
     }
+
     return res.render('sign_in', {
         title: "Codeial | Sign In"
     })
@@ -61,6 +62,7 @@ module.exports.create = function(req, res){
         }
         if(user)
         {
+            req.flash('error','User already registered!!');
             console.log(user);
             return res.redirect('back');
         }
@@ -76,11 +78,29 @@ module.exports.create = function(req, res){
 
                 if(err)
                 {
+                    
+
                     console.log("Error in creating user",err);
                     return res.redirect('back');
                 }
                 
-
+                //  //checking for friend..will comment it later
+                // User.findById(user.id,function(err,user1)
+                // {
+                //     if(err)
+                //     {
+                //         console.log("Again failed",err);
+                //         return res.redirect('back');
+                //     }
+                //     console.log(user1);
+                    
+                //     user.Friends.push(user1.id);
+                //     user.save();
+                    
+                    
+                    
+                // })
+                req.flash('success','Hurray..Registration done!!');
                 return res.redirect('/users/sign-in');
             })
         }
@@ -91,14 +111,31 @@ module.exports.create = function(req, res){
 
 // sign in and create a session for the user
 module.exports.createSession = function(req, res){
-    
+    req.flash('success','Welcome back '+req.user.Name);
     return res.redirect('/');
 }
 
 module.exports.destroySession = function(req, res){
-    
+    req.flash('success','See you soon '+req.user.Name);
     req.logout();
    
-
+    
     return res.redirect('/');
+}
+
+
+//updating credentials
+
+module.exports.update=function(req,res)
+{
+    User.findByIdAndUpdate(req.user.id,{Email:req.body.email,Name:req.body.name},function(err,user)
+    {
+        if(err)
+        {
+            console.log(err);
+            return;
+        }
+        req.flash('success','Updated Successfully')
+        return res.redirect('back');
+    })
 }

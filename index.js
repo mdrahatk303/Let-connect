@@ -1,3 +1,4 @@
+
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const app = express();
@@ -10,6 +11,11 @@ const session = require('express-session');
 const passport = require('passport');
 const passportLocal = require('./config/passport-local-strategy');
 const MongoStore = require('connect-mongo')(session);
+
+//For flash messages
+const flash=require('connect-flash');
+const flashmidware=require('./config/flash_middleware');
+
 
 app.use(express.urlencoded());
 
@@ -56,7 +62,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(passport.setAuthenticatedUser);
-
+app.use(flash());
+app.use(flashmidware.setFlash);
 // use express router
 app.use('/', require('./routes'));
 

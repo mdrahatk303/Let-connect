@@ -26,7 +26,7 @@ module.exports.createComment=function(req,res)
                 // console.log("herrrrrrrrr");
                 post.comments.push(comment);
                 post.save();
-
+                req.flash('success','Commented!!!');
                 return res.redirect('back');
 
             })
@@ -76,7 +76,7 @@ module.exports.destroyComment=function(req,res)
                }
               // return res.json(post);
            });
-           
+           req.flash('success','Comment Deleted!!');
            return res.redirect('back');
         }
         else

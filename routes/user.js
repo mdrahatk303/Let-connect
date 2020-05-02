@@ -9,6 +9,8 @@ router.get('/profile/:userId', passport.checkAuthentication, usersController.pro
 router.get('/sign-up', usersController.signUp);
 router.get('/sign-in', usersController.signIn);
 
+//updating credentials
+router.post('/update',usersController.update);
 
 router.post('/create', usersController.create);
 
@@ -16,7 +18,7 @@ router.post('/create', usersController.create);
 router.post('/create-session', passport.authenticate(
     'local',
     {failureRedirect: '/users/sign-in'},
-), usersController.createSession);
+),usersController.createSession);
 
 
 router.get('/sign-out', usersController.destroySession);

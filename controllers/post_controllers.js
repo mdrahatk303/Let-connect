@@ -15,6 +15,7 @@ module.exports.createPost=function(req,res)
             return res.redirect('back');
         }
         //console.log(post);
+        req.flash('success','Post created!!');
         return res.redirect('back');
     })
 }
@@ -42,6 +43,7 @@ module.exports.destroyPost=function(req,res)
                     //res.json(result);
                     
                 });
+                req.flash('success','Post and associated comments Deleted!!');
                 return res.redirect('back');
             }
             else
