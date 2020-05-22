@@ -1,9 +1,12 @@
 const User = require('../models/UserSchema');
-
+const fs=require('fs');
+const path=require('path');
 
 module.exports.profile = function(req, res){
+    //console.log(req.query+" fgfgfth");
     User.findById(req.params.userId,function(err,user)
     {
+        console.log(user);
         if(err)
         {
             console.log(err);
@@ -13,7 +16,7 @@ module.exports.profile = function(req, res){
     })
     
 }
-
+ 
 
 // render the sign up page
 module.exports.signUp = function(req, res){
@@ -32,6 +35,7 @@ module.exports.signUp = function(req, res){
 module.exports.signIn = function(req, res){
 
     
+   
     if (req.isAuthenticated()){
         {
            
@@ -57,7 +61,7 @@ module.exports.create = function(req, res){
     {
         if(err)
         {
-            console.log("errror in findind");
+            console.log("errror in finding");
             return res.redirect('back');
         }
         if(user)
@@ -84,22 +88,7 @@ module.exports.create = function(req, res){
                     return res.redirect('back');
                 }
                 
-                //  //checking for friend..will comment it later
-                // User.findById(user.id,function(err,user1)
-                // {
-                //     if(err)
-                //     {
-                //         console.log("Again failed",err);
-                //         return res.redirect('back');
-                //     }
-                //     console.log(user1);
-                    
-                //     user.Friends.push(user1.id);
-                //     user.save();
-                    
-                    
-                    
-                // })
+            
                 req.flash('success','Hurray..Registration done!!');
                 return res.redirect('/users/sign-in');
             })
@@ -111,11 +100,14 @@ module.exports.create = function(req, res){
 
 // sign in and create a session for the user
 module.exports.createSession = function(req, res){
+    
     req.flash('success','Welcome back '+req.user.Name);
+    
     return res.redirect('/');
 }
 
 module.exports.destroySession = function(req, res){
+    
     req.flash('success','See you soon '+req.user.Name);
     req.logout();
    
@@ -126,16 +118,54 @@ module.exports.destroySession = function(req, res){
 
 //updating credentials
 
-module.exports.update=function(req,res)
+module.exports.update= async function(req,res)
 {
-    User.findByIdAndUpdate(req.user.id,{Email:req.body.email,Name:req.body.name},function(err,user)
-    {
-        if(err)
+    
+    // User.findByIdAndUpdate(req.user.id,{Email:req.body.email,Name:req.body.name},function(err,user)
+    // {
+    //     if(err)
+    //     {
+    //         console.log(err);
+    //         return;
+    //     }
+    //     req.flash('success','Updated Successfully')
+    //     return res.redirect('back');
+    // })
+
+    try {
+        let user=await User.findById(req.user.id);
+        
+        User.uploadedAvatar(req,res,function(err)
         {
-            console.log(err);
-            return;
-        }
+            if(err)
+            {
+                console.log("Multer error",err);
+                req.flash('error','Multer Error')
+                return res.redirect('back');
+
+            }
+            user.Name=req.body.name;
+            user.Email=req.body.email;
+            console.log(req.file);
+            if(req.file)
+            {
+               // If already image->remove it before adding new image
+               if(user.avatar)
+               {
+                    fs.unlinkSync(path.join(__dirname,'..',user.avatar));
+               }
+                user.avatar=User.avatarPath+'/'+req.file.filename;
+            }
+            user.save();
+        });
         req.flash('success','Updated Successfully')
         return res.redirect('back');
-    })
+        
+    } catch (error) {
+        console.log("Error",error);
+        return;
+    }
+    
+
+
 }

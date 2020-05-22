@@ -1,14 +1,19 @@
 
 <link rel="stylesheet" href="/css/user_profile.css">
+
 <h1>This is <%=title%> section</h1>
+<img src="<%=userInfo.avatar%>" alt="<%=userInfo.Name%>" width="30%" height="30%" style="margin-left: 35%;">
+
 <p><h3>Name:<%=userInfo.Name%></h3></p>
 <p><h3>Email:<%=userInfo.Email%></h3></p>
 
 
 <% if(userInfo.id==locals.user.id){%>
-<form method="POST" action="/users/update">
-    <input type="email" name="email" placeholder="New Email">
-    <input type="text" name="name" placeholder="New User Name">
+<form method="POST" action="/users/update" enctype="multipart/form-data">
+    <input type="email" name="email" placeholder="New Email" value="<%=userInfo.Email%>" required>
+    <input type="text" name="name" placeholder="New User Name" value="<%=userInfo.Name%>" required>
+    <input type="file" placeholder="Profile Pic" name="avatar">
     <input type="submit" value="Update">
+   
 </form>
 <%}%>

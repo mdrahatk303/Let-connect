@@ -6,11 +6,17 @@ const port = 8000;
 const expressLayouts = require('express-ejs-layouts');
 const db = require('./config/mongoose');
 const path = require('path');
+
+
 // used for session cookie
 const session = require('express-session');
+
 const passport = require('passport');
+const passport_googleStrategy=require('./config/passport-google-oauth2-strategy');
+
 const passportLocal = require('./config/passport-local-strategy');
 const MongoStore = require('connect-mongo')(session);
+
 
 //For flash messages
 const flash=require('connect-flash');
@@ -19,9 +25,17 @@ const flashmidware=require('./config/flash_middleware');
 
 app.use(express.urlencoded());
 
+
+
+//*******NOTE********
+//No, passport itself does not require cookie-parser middleware.
+//If you want session-persistent authentication then you'll need the express-session middleware,
+//which used to require cookie-parser, but modern versions of express no longer have this requirement 
+//(the current version of express-session reads and writes cookies directly).
 app.use(cookieParser());
 
 app.use(express.static('./assets'));
+app.use('/uploads',express.static(path.join(__dirname+'/uploads')));
 
 app.use(expressLayouts);
 // extract style and scripts from sub pages into the layout
