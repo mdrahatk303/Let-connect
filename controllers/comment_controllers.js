@@ -1,5 +1,7 @@
 const Comment=require('../models/Comment');
 const Post=require('../models/Post');
+const comment_mailer=require('../mailer/comment_mailer');
+
 
 module.exports.createComment=function(req,res)
 {
@@ -26,6 +28,24 @@ module.exports.createComment=function(req,res)
                 // console.log("herrrrrrrrr");
                 post.comments.push(comment);
                 post.save();
+
+                //Populating user for to send mail to this user
+                //it is used with query:eg->.find etc
+                // Comment.findById(comment.id).populate('user').exec(function(err, cmnt) {
+                //     if (err) return handleError(err);
+                //     //console.log(user);
+                //     //console.log(cmnt.user.Email);
+                //     comment_mailer.newComment(cmnt);
+                // });
+               
+                //execpopulate is used when document is already fetched eg:here is comment
+                comment=comment.populate('user','Name Email').execPopulate(function(err,cmnt)//only name and email is populated,if nothing given then all elems will be populated
+                {
+                    if(err){console.log(err);return}
+                    comment_mailer.newComment(cmnt);
+                });
+                
+
                 req.flash('success','Commented!!!');
                 return res.redirect('back');
 

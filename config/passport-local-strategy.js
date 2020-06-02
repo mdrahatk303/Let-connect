@@ -17,7 +17,7 @@ passport.use(new LocalStrategy({
                 console.log('Error in finding user --> Passport');
                 return done(err);
             }
-
+ 
             if (!user || user.Password != password){
                 console.log('Invalid Username/Password');
                 req.flash('error','User not Found!!');

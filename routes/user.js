@@ -25,5 +25,5 @@ router.get('/auth/google/callback',passport.authenticate('google',{failureRedire
  
 router.get('/sign-out', usersController.destroySession);
  
-
+ 
 module.exports = router;
