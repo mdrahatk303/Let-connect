@@ -8,8 +8,8 @@ let transporter=nodemailer.createTransport({
     port:587,
     secure:false,
     auth:{
-        user:"rahatscience@gmail.com",//change it before deploy to github
-        pass:"Rahat@1408"//change it before deploy to github
+        user:"abc@gmail.com",//change it before deploy to github
+        pass:"pass"//change it before deploy to github
     }
 });
 

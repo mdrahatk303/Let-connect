@@ -13,14 +13,14 @@
         <!-- <% if(locals.flash.success_message && flash.success_message.length>0){%>
             
            <h1 style="color: green;"><%=flash.success_message%>!!</h1> 
-            <%}%> -->
+            <%}%> --> 
       
         <%- body %>
         <%- include('_footer'); -%>
       
         <%- script %>
 
-        <script>
+        <script> 
             <%if(flash.success_message && flash.success_message.length>0){%>
                     new Noty({
                         theme:'relax',
@@ -28,7 +28,7 @@
                         type:'success',
                         layout:'topCenter',
                         timeout:1500,
-                        
+                         
                     }).show();
                 <%}%> 
 

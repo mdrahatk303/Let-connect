@@ -149,6 +149,8 @@ module.exports.update= async function(req,res)
             console.log(req.file);
             if(req.file)
             {
+                
+
                // If already image->remove it before adding new image
                if(user.avatar)
                {

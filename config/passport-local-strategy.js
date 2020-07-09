@@ -28,7 +28,7 @@ passport.use(new LocalStrategy({
             return done(null, user);
         });
     }
-  
+   
 
 ));
 
@@ -71,6 +71,7 @@ passport.setAuthenticatedUser = function(req, res, next){
     }
 
     next();
+    
 }
 
 

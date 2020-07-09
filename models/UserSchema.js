@@ -14,7 +14,7 @@ var User_Schema=mongoose.Schema({
         unique:true
     },
     Password:{
-        type:String,
+        type:String, 
         required:true
     },
     Friends:[

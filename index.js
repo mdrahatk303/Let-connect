@@ -2,7 +2,7 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const app = express();
-const port = 8000;
+const port = 8010;
 const expressLayouts = require('express-ejs-layouts');
 const db = require('./config/mongoose');
 const path = require('path');
@@ -21,7 +21,7 @@ const MongoStore = require('connect-mongo')(session);
 //For flash messages
 const flash=require('connect-flash');
 const flashmidware=require('./config/flash_middleware');
-
+ 
 
 app.use(express.urlencoded());
 
@@ -89,3 +89,4 @@ app.listen(port, function(err){
 
     console.log(`Server is running on port: ${port}`);
 });
+

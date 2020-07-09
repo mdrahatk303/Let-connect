@@ -5,4 +5,4 @@ module.exports.setFlash=function(req,res,next)
         'error_message':req.flash('error')
     }
     next();
-}
+}  

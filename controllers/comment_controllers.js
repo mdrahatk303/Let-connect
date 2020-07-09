@@ -6,7 +6,7 @@ const comment_mailer=require('../mailer/comment_mailer');
 module.exports.createComment=function(req,res)
 {
     Post.findById(req.body.postId,function(err,post)
-    {
+    { 
         if(err)
         {
             console.log("Error in finding post",err);
@@ -20,7 +20,7 @@ module.exports.createComment=function(req,res)
                 user:req.user.id
             },function(err,comment)
             {
-                if(err)
+                if(err) 
                 {
                     console.log("error in creating comment",err);
                     return res.redirect('back');

@@ -19,7 +19,7 @@ passport.use(new GoogleStrategy(
                 return done(err);
             }
             if(!user)
-            {
+            { 
                 //If  this email is not registered in our website then create a new account with random password using crypto
                 User.create({
                     Email:profile.emails[0].value,

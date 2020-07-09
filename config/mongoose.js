@@ -1,5 +1,5 @@
 const mongoose=require('mongoose')
-mongoose.connect('mongodb://localhost/codeialDb');
+mongoose.connect('mongodb://localhost/codeialDbRahul');
 
 const db=mongoose.connection;
 db.on('error',function(err)
