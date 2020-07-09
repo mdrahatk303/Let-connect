@@ -4,9 +4,10 @@ const User=require('../models/UserSchema');
 const crypto=require('crypto');
 passport.use(new GoogleStrategy(
     {
-    clientID:"710770012933-p6dm2otvsj2hjcs44rgmbdjei7kdaopq.apps.googleusercontent.com",
-    clientSecret:"bslHTPAo90bEzum3suPTCuGM",
-    callbackURL:"http://localhost:8000/users/auth/google/callback"
+        clientID:"",
+    clientSecret:"",
+    callbackURL:""
+    
     },
     function(accesstoken,refreshtoken,profile,done)
     {
